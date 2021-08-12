@@ -23,18 +23,32 @@ var fightOrSkip = function() {
 return false;
 }
 var fight = function(enemy) {
+    var isPlayerTurn = true;
+    if(Math.random() > 0.5) {
+        isPlayerTurn = false;
+    }
+
+
     console.log(enemy);
 while(playerInfo.health > 0 && enemy.health > 0) {
+    if (isPlayerTurn) {
      if (fightOrSkip()) {
          break;
-     };
+     }
 
     //subtract the value of 'player attack' from the value of 'enemyHealth' and use that result to update the value in the `enemyHealth` variable
-   var damage = randomNumber(playerInfo.attack - 3, playerInfo.attack)
+   var damage = randomNumber(playerInfo.attack - 3, playerInfo.attack);
     enemy.health = Math.max(0, enemy.health - damage);
     // Log a resulting message to the console so we know that it worked.
 console.log(
-    playerInfo.name + " attacked " + enemy.name + ". " + enemy.name + " now has " + enemy.health + " health remaining."
+    playerInfo.name + 
+    " attacked " +
+    enemy.name +
+    ". " +
+    enemy.name + 
+    " now has " 
+    + enemy.health 
+    + " health remaining."
 );
      //check enemy's health
      if (enemy.health <= 0) {
@@ -47,14 +61,21 @@ console.log(
     else {
         window.alert(enemy.name + " still has " + enemy.health + " health left.");
     }
-
+}
+    else {
     // Subtract the value of `enemy.attack` from the value of `playerInfo.health` and use that result to update the value in the `playerInfo.health` variable.
     var damage = randomNumber(enemy.attack - 3, enemy.attack);
     playerInfo.health = Math.max(0, playerInfo.health - damage);
 
     // Log a resulting message to the console so we know that it worked.
     console.log(
-    enemy.name + " attacked " + playerInfo.name + ". " + playerInfo.name + " now has " + playerInfo.health + " health remaining."
+    enemy.name + 
+    " attacked " + 
+    playerInfo.name + 
+    ". " + playerInfo.name + 
+    " now has " + 
+    playerInfo.health + 
+    " health remaining."
     );
 
      //check player's health
@@ -66,7 +87,8 @@ console.log(
     else {
         window.alert(playerInfo.name + " still has " + playerInfo.health + " health left.");
     }
-    
+}
+isPlayerTurn = !isPlayerTurn;
 }
 };
 var startGame = function() {
